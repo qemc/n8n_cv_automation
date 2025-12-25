@@ -1,0 +1,19 @@
+# Job Offer Scraper Dependencies
+
+# Browser automation with anti-detection
+undetected-chromedriver>=3.5.0
+
+# Selenium WebDriver
+selenium>=4.15.0
+
+# Required for Python 3.12+ (distutils removed)
+setuptools>=70.0.0
+
+# Optional: Deployment / API (for RPi integration)
+fastapi>=0.100.0
+uvicorn>=0.20.0
+pydantic>=2.0.0
+git+https://github.com/qemc/single_offer_scraper.git
+# Note: Chrome/Chromium browser must be installed on the system
+# macOS: brew install --cask google-chrome
+# Raspberry Pi: sudo apt install chromium-browser xvfb
