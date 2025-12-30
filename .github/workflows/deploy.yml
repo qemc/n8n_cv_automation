@@ -1,0 +1,27 @@
+name: Deploy to Raspberry Pi
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # <--- This finds your Pi
+    
+    env:
+      TARGET_DIR: /home/qemc/Documents/jobScraper/n8n_cv_automation
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Sync Files
+        run: |
+          echo "Deploying to $TARGET_DIR..."
+          rsync -av --exclude='.git' --exclude='.env' --exclude='n8n_data' ./ $TARGET_DIR/
+
+      - name: Restart Scraper Service
+        run: |
+          cd $TARGET_DIR
+          docker compose up -d --build scraper_api
+          docker compose restart scraper_api
