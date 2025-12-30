@@ -1,7 +1,8 @@
 services:
+  # Service 1: n8n (Workflow Automation)
   n8n:
     image: docker.n8n.io/n8nio/n8n:latest
-    container_name: n8n
+    container_name: scraper_n8n
     restart: unless-stopped
     ports:
       - "5678:5678"
@@ -17,3 +18,14 @@ services:
     volumes:
       - ./n8n_data:/home/node/.n8n
       - ./workflows:/home/node/workflows
+    # Explicitly depends on scraper so they start in order (optional but good)
+    depends_on:
+      - scraper_api
+  scraper_api:
+    build: .
+    container_name: scraper_api
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app

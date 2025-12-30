@@ -1,6 +1,5 @@
+from typing import List
 from pydantic import BaseModel
 
-
-
 class JobOffer(BaseModel):
-    url: str
+    urls: List[str]
