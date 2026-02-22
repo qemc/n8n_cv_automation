@@ -1,7 +1,7 @@
 services:
   scraper_api:
-  build: .
-  container_name: scraper_api
-  restart: always
-  ports:
-    - "8000:8000"
+    build: .
+    container_name: scraper_api
+    restart: always
+    ports:
+      - "8000:8000"
